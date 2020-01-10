@@ -33,7 +33,10 @@ class PullCommand extends CommandSignedIn {
       // const currentDirectory = await this.getDefaultDirectory()
       await this.pull({ project, env, force })
     } catch (error) {
-      await this.pull({})
+      if (process.env.KEYSTONE_SHARED) {
+        await this.pull({})
+      }
+      console.log(error)
     }
   }
 }

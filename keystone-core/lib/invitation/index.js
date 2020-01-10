@@ -203,7 +203,7 @@ const deleteInvites = async (userSession, { project, emails }) => {
 
 const acceptInvite = async (
   userSession,
-  { name, from, blockstackId, userEmail }
+  { name, from, blockstackId, userEmail, retry = 0 }
 ) => {
   const projects = await getProjects(userSession)
   const { username } = userSession.loadUserData()
@@ -247,7 +247,16 @@ const acceptInvite = async (
 
       return projects
     } catch (error) {
-      console.log('TCL: error', error)
+      console.log(error)
+      if (retry <= 5) {
+        await acceptInvite(userSession, {
+          name,
+          from,
+          blockstackId,
+          userEmail,
+          retry: retry + 1,
+        })
+      }
     }
   }
 }
