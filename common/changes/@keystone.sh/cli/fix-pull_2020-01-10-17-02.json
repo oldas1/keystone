@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@keystone.sh/cli",
+      "comment": "fix pull reading deleted file on disk",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@keystone.sh/cli",
+  "email": "contact@wearedevx.com"
+}
