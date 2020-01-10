@@ -206,7 +206,7 @@ const pull = async (
         const fileDescriptorToWriteOnDisk = deepCopy(fileDescriptor)
         let conflict
 
-        if (fileModified && fileModified.status !== 'ok') {
+        if (fileModified && fileModified.status === 'modified') {
           const currentVersion = await readFileFromDisk(fileModified.path)
           const base = daffy.applyPatch(
             fileDescriptor.content,
